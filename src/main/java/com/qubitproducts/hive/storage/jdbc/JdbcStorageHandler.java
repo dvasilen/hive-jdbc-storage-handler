@@ -30,7 +30,7 @@ import com.qubitproducts.hive.storage.jdbc.conf.JdbcStorageConfigManager;
 import java.util.Map;
 import java.util.Properties;
 
-public class JdbcStorageHandler implements HiveStorageHandler {
+public class JdbcStorageHandler  extends org.apache.hcatalog.mapreduce.HCatStorageHandler {
 
     private Configuration conf;
 
@@ -72,13 +72,13 @@ public class JdbcStorageHandler implements HiveStorageHandler {
         return null;
     }
 
-
+/*
     @Override
     public void configureTableJobProperties(TableDesc tableDesc, Map<String, String> jobProperties) {
         Properties properties = tableDesc.getProperties();
         JdbcStorageConfigManager.copyConfigurationToJob(properties, jobProperties);
     }
-
+*/
 
     @Override
     public void configureInputJobProperties(TableDesc tableDesc, Map<String, String> jobProperties) {
@@ -97,5 +97,9 @@ public class JdbcStorageHandler implements HiveStorageHandler {
     public HiveAuthorizationProvider getAuthorizationProvider() throws HiveException {
         return null;
     }
+	
+	public void configureJobConf(org.apache.hadoop.hive.ql.plan.TableDesc tableDesc,org.apache.hadoop.mapred.JobConf jobConf) {
+	}
+
 
 }

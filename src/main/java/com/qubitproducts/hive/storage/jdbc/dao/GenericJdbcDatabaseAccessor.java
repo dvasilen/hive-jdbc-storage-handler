@@ -19,6 +19,9 @@ import org.apache.commons.dbcp.BasicDataSourceFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import com.qubitproducts.hive.storage.jdbc.conf.JdbcStorageConfig;
 import com.qubitproducts.hive.storage.jdbc.conf.JdbcStorageConfigManager;
@@ -33,6 +36,7 @@ import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Properties;
 
@@ -210,12 +214,13 @@ public class GenericJdbcDatabaseAccessor implements DatabaseAccessor {
     }
 
 
+	
     protected Properties getConnectionPoolProperties(Configuration conf) {
         // Create the default properties object
         Properties dbProperties = getDefaultDBCPProperties();
 
         // override with user defined properties
-        Map<String, String> userProperties = conf.getValByRegex(DBCP_CONFIG_PREFIX + "\\.*");
+        Map<String, String> userProperties = getValByRegex(conf, DBCP_CONFIG_PREFIX + "\\.*");
         if ((userProperties != null) && (!userProperties.isEmpty())) {
             for (Entry<String, String> entry : userProperties.entrySet()) {
                 dbProperties.put(entry.getKey().replaceFirst(DBCP_CONFIG_PREFIX + "\\.", ""), entry.getValue());
@@ -229,6 +234,20 @@ public class GenericJdbcDatabaseAccessor implements DatabaseAccessor {
         return dbProperties;
     }
 
+	public Map<String,String> getValByRegex(Configuration conf, String regex) {
+		Pattern p = Pattern.compile(regex);
+
+		Map<String,String> result = new HashMap<String,String>();
+		Matcher m;
+
+		for(Map.Entry<String,String> item: conf) {
+			m = p.matcher(item.getKey());
+			if(m.find()) { 
+			result.put(item.getKey(), item.getValue());
+			}
+		}
+		return result;
+	}	
 
     protected Properties getDefaultDBCPProperties() {
         Properties props = new Properties();

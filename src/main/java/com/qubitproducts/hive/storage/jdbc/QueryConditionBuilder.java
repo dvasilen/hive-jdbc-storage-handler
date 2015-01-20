@@ -37,7 +37,7 @@ public class QueryConditionBuilder {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QueryConditionBuilder.class);
     private static final String EMPTY_STRING = "";
-    private static QueryConditionBuilder instance = null;
+    private static  QueryConditionBuilder instance = null;
 
 
     public static QueryConditionBuilder getInstance() {
@@ -122,7 +122,8 @@ public class QueryConditionBuilder {
             return EMPTY_STRING;
         }
 
-        try (XMLDecoder decoder = new XMLDecoder(new ByteArrayInputStream(filterXml.getBytes("UTF-8")))) {
+        try  {
+			XMLDecoder decoder = new XMLDecoder(new ByteArrayInputStream(filterXml.getBytes("UTF-8")));
             Object object = decoder.readObject();
             if (!(object instanceof ExprNodeDesc)) {
                 LOGGER.error("Deserialized filter expression is not of the expected type");
