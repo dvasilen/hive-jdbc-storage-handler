@@ -6,10 +6,10 @@ read the results of a query run on an RDBMS such as MySQL.
 
 Updates
 -----
-dvasilen: January 20, 2015:
-1. Updated for Hive 0.13.0 
-2. Updated storage handler to extend org.apache.hcatalog.mapreduce.HCatStorageHandler 
-3. Note the following dependencies: commons-pool.1.5.4.jar, commons-dbcp-1.4.jar,mysql-connector-java-5.1.21-bin.jar 
+dvasilen: January 20, 2015:   
+1. Updated for Hive 0.13.0   
+2. Updated storage handler to extend org.apache.hcatalog.mapreduce.HCatStorageHandler   
+3. Note the following dependencies: commons-pool.1.5.4.jar, commons-dbcp-1.4.jar,mysql-connector-java-5.1.21-bin.jar   
 
 
 Usage
