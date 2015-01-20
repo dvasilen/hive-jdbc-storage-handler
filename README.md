@@ -9,7 +9,8 @@ Updates
 dvasilen: January 20, 2015:   
 1. Updated for Hive 0.13.0   
 2. Updated storage handler to extend org.apache.hcatalog.mapreduce.HCatStorageHandler   
-3. Note the following dependencies: commons-pool.1.5.4.jar, commons-dbcp-1.4.jar,mysql-connector-java-5.1.21-bin.jar   
+3. Note the following dependencies: commons-pool.1.5.4.jar, commons-dbcp-1.4.jar,mysql-connector-java-5.1.21-bin.jar  
+4. The latest jar is at https://github.com/dvasilen/hive-jdbc-storage-handler/raw/HIVE-0.13.0/release/hive-jdbc-storage-handler-hive-0.13.0-1.1.1.jar  
 
 
 Usage
